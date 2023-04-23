@@ -5,28 +5,28 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 //@Component
-@Repository//db ye erişilen class, componentin gelişmişi
-public class StudentRepositoryImpl implements StudentRepository{
+@Repository// Repository annotation'ı ile SpringFramework'e Database ile iletişime geçeceğimi söylemiş oluyorum.
+public class StudentRepositoryImpl implements StudentRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
     public void save(Student student) {
-        Session session=sessionFactory.openSession();
-        Transaction transaction=session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
 
-        session.saveOrUpdate(student);//db de kayıt varsa update eder, yoksa kaydeder.
+        session.saveOrUpdate(student); // db de boyle bir kayit varsa update eder, yoksa kaydeder.
 
-        transaction.commit();
+        tx.commit();
         session.close();
+//        sessionFactory.close(); sessionFactory yonetimi Springde o yuzden bizim kapatmamiza gerek yok.
     }
 
     @Override
@@ -43,4 +43,5 @@ public class StudentRepositoryImpl implements StudentRepository{
     public void delete(Long id) {
 
     }
+
 }

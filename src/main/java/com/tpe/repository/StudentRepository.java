@@ -9,7 +9,8 @@ public interface StudentRepository {
 
     void save(Student student);
     List<Student> findAll();
-    Optional<Student> findById(Long id);//NullPointer exception almamak için
-    //null yerine boş bir optional objesi döndürür.
+    Optional<Student> findById(Long id); // return type Student yaparsak NullPointerException aliriz.
+    // Optional kullandigimizda null yerine bos bir Optional object dondurur.
     void delete(Long id);
+
 }
